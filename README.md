@@ -12,6 +12,8 @@ or charging
 
 ![charging](https://github.com/iamthevoid/battery-view-android/blob/master/charging_white.png)
 
+You can set any size as you want, aspect ratio of view will be the same anyway;
+
 Also you can set percet in code:
 
 ``` java
