@@ -23,7 +23,7 @@ or
 
 ``` java
     BatteryView bv = (BatteryView) findViewById(R.id.battery);
-    bv.setPercent(32);
+    bv.setCharging(true);
 ```
 
 You can set attributes in xml:
