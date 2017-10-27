@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BatteryView</string>
+    <string name="charging">Charging</string>
+    <string name="percent" formatted="false">%d%%</string>
+</resources>
