@@ -8,10 +8,10 @@
 
 
     <iam.thevoid.batteryview.BatteryView
-        android:layout_width="100dp"
+        android:layout_width="32dp"
         android:layout_margin="32dp"
         android:layout_gravity="center"
-        app:bv_percent="63"
-        app:bv_color="@android:color/holo_green_dark"
+        app:bv_percent="12"
+        app:bv_color="@android:color/holo_red_dark"
         android:layout_height="200dp"/>
 </FrameLayout>

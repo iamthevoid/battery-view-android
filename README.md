@@ -14,7 +14,7 @@ or charging
 
 You can set any size as you want, aspect ratio of view will be the same anyway;
 
-Also you can set percet in code:
+Also you can set percent in code:
 
 ``` java
     BatteryView bv = (BatteryView) findViewById(R.id.battery);
@@ -50,9 +50,16 @@ app:bv_charging="true"
 
 
 
-   You can add this lib in your project as simple as add this line to your build.gradle file
+You can add this lib in your project as simple as add this line to your build.gradle file
+
+Appcompat
 ```
    implementation 'iam.thevoid.batteryview:batteryview:0.1'
+```
+
+Android X
+```
+   implementation 'iam.thevoid.batteryview:batteryview:0.2'
 ```
 
 [Library at Bintray](https://bintray.com/iamthevoid/maven/BatteryView)
