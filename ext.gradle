@@ -1,0 +1,26 @@
+def property(String key) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty(key)
+}
+
+ext {
+    libBintrayUser = property('bintrayUser')
+    libBintrayApiKey = property('bintrayApiKey')
+
+    libPublishVersion = '0.5.5'
+    libUploadName = 'BatteryView'
+    libGroupId = 'iam.thevoid.batteryview'
+    libUserOrg = 'iamthevoid'
+
+    libLcenseName = 'The Apache Software License, Version 2.0'
+    libLcenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    libLicences = ['Apache-2.0']
+
+    libGit = 'https://github.com/iamthevoid/battery-view-android.git'
+    libWebsite = 'https://github.com/iamthevoid/battery-view-android'
+
+    libDeveloperId = 'iamthevoid'
+    libDeveloperName = 'Alexander Tarabrin'
+    libDeveloperEmail = 'alesetar@gmail.com'
+}

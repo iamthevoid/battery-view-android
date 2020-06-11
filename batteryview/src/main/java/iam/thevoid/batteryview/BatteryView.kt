@@ -1,3 +1,5 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
+
 package iam.thevoid.batteryview
 
 import android.content.Context
@@ -6,8 +8,11 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.IntRange
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 
 /**
  * Created by iam on 24.10.17.
@@ -15,20 +20,26 @@ import androidx.appcompat.widget.AppCompatImageView
 class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = -1) : AppCompatImageView(context, attrs, defStyleAttr) {
     private var batteryLevelPaint: Paint? = null
     private var isCharging = false
-    private var mColor = Color.WHITE
     private var borderThickness = 0f
     private var batteryLevelCornerRadius = 0f
     private var percent = 0f
     private val rect = RectF(0f, 0f, 0f, 0f)
 
+    @ColorInt
+    var color = Color.WHITE
+        set(newColor) {
+            field = newColor
+            setColorFilter(newColor)
+            batteryLevelPaint = Paint().apply {
+                color = newColor
+            }
+        }
+
     init {
         attrs?.also(::obtainAttributes)
         super.setScaleType(ScaleType.FIT_XY)
         super.setImageResource(R.drawable.ic_battery)
-        setColorFilter(mColor)
-        batteryLevelPaint = Paint().apply {
-            color = mColor
-        }
+
         setCharging(isCharging)
         setWillNotDraw(false)
     }
@@ -40,7 +51,7 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
                 0, 0)
         try {
             isCharging = a.getBoolean(R.styleable.BatteryView_bv_charging, false)
-            mColor = a.getColor(R.styleable.BatteryView_bv_color, Color.WHITE)
+            color = a.getColor(R.styleable.BatteryView_bv_color, Color.WHITE)
             percent = a.getInteger(R.styleable.BatteryView_bv_percent, 0).toFloat()
         } finally {
             a.recycle()
@@ -81,9 +92,10 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
         invalidate()
     }
 
-    override fun invalidate() {
-        super.invalidate()
+    fun setColorRes(@ColorRes colorRes: Int) {
+        color = ContextCompat.getColor(context, colorRes)
     }
+
 
     /**
      * magic numbers for paddings of inside rect

@@ -59,7 +59,7 @@ Appcompat
 
 Android X
 ```
-   implementation 'iam.thevoid.batteryview:batteryview:0.2'
+   implementation 'iam.thevoid.batteryview:batteryview:0.5.5'
 ```
 
 [Library at Bintray](https://bintray.com/iamthevoid/maven/BatteryView)

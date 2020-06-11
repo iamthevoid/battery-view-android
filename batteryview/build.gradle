@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -26,15 +26,9 @@ android {
 
 }
 
-publish {
-    groupId = 'iam.thevoid.batteryview'
-    artifactId = 'batteryview'
-    userOrg = 'iamthevoid'
-    publishVersion = '0.2'
-    desc = 'Simple view to show battery charging level.'
-    licences = ['Apache-2.0']
-    uploadName='BatteryView'
-    website = 'https://github.com/iamthevoid/battery-view-android.git'
+ext {
+    libDesc = 'Simple view to show battery charging level.'
+    libArtifactId = 'batteryview'
 }
 
 dependencies {
@@ -42,9 +36,14 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.3.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
 }
+
+apply from: "../ext.gradle"
+apply from: "../install.gradle"
+apply from: "../deploy.gradle"
+
