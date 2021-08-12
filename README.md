@@ -1,55 +1,20 @@
+
 # battery-view-android
 
-Simple View to show battery level as
+Simple View to show battery level. View scales perfectly inside bounds whatever they are, so it looks always beautiful. View can be customized. Except bounds and color can be changed: charging status - is charging or not, border thickness, spacing between border and battery-level rect and sure battery level percent. If need something else you can just leave feature request. Screenshots how it looks like:
 
-![red](https://github.com/iamthevoid/battery-view-android/blob/master/red_empty.png)
+Charged             |  Charging          |  Discharged a bit
+:-------------------------:|:-------------------------:|:-------------------------:
+![charged](media/charged.png "Charged")   |  ![charging](media/charging.png "Charging") |  ![discharged](media/discharged.png "Discharged a bit")
+##
 
-or as
-
-![green](https://github.com/iamthevoid/battery-view-android/blob/master/green_63_percent.png)
-
-or charging
-
-![charging](https://github.com/iamthevoid/battery-view-android/blob/master/charging_white.png)
-
-You can set any size as you want, aspect ratio of view will be the same anyway;
-
-Also you can set percent in code:
-
-``` java
-    BatteryView bv = (BatteryView) findViewById(R.id.battery);
-    bv.setPercent(32);
-```
-
-or
-
-``` java
-    BatteryView bv = (BatteryView) findViewById(R.id.battery);
-    bv.setCharging(true);
-```
-
-You can set attributes in xml:
-
-
-```app:bv_color``` has 'color' type sets the color of view:
-
-app:bv_color="#000"
-
-or
-
-app:bv_color="@color/red"
-
-```app:bv_percent``` has 'integer' type sets the percent of battery:
-
-app:bv_percent="34"
-
-```app:bv_charging``` has 'boolean' type sets the charging state. If battery is 'charging'
-percents are not shown
-
-app:bv_charging="true"
-
-
-
+Also you can set attributes in xml:
+attribute             |  meaning
+:-------------------------:|:-------------------------:
+```app:bv_color``` | has 'color' type and sets the color of view
+```app:bv_percent``` | has 'integer' type sets the percent of battery
+```app:bv_charging``` | has 'boolean' type sets the charging state. If battery is 'charging' level rect is not shown
+##
 You can add this lib in your project as simple as add this line to your build.gradle file
 
 Appcompat
@@ -63,5 +28,3 @@ Android X
 ```
 
 [Library at Bintray](https://bintray.com/iamthevoid/maven/BatteryView)
-
-
