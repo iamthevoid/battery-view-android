@@ -1,17 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="iam.thevoid.batteryviewexample.MainActivity">
+    tools:context="iam.thevoid.batteryviewexample.MainActivity"
+    tools:ignore="HardcodedText, RtlHardcoded">
+
+    <TextView
+        android:id="@+id/width_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Width"
+        app:layout_constraintStart_toStartOf="@id/width_seek"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <iam.thevoid.batteryview.BatteryView
-        android:layout_width="32dp"
-        android:layout_margin="32dp"
-        android:layout_gravity="center"
-        app:bv_percent="12"
-        app:bv_color="@android:color/holo_red_dark"
-        android:layout_height="200dp"/>
-</FrameLayout>
+    <SeekBar
+        android:id="@+id/width_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintEnd_toStartOf="@id/height_seek"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/width_label" />
+
+    <TextView
+        android:id="@+id/heigth_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Height"
+        app:layout_constraintBottom_toBottomOf="@id/width_label"
+        app:layout_constraintStart_toStartOf="@id/height_seek" />
+
+    <SeekBar
+        android:id="@+id/height_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/width_seek"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/width_seek" />
+
+
+    <TextView
+        android:id="@+id/red_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Red"
+        app:layout_constraintStart_toStartOf="@id/red_seek"
+        app:layout_constraintTop_toBottomOf="@id/height_seek" />
+
+    <SeekBar
+        android:id="@+id/red_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintEnd_toStartOf="@id/green_seek"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/red_label" />
+
+
+    <TextView
+        android:id="@+id/green_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Green"
+        app:layout_constraintStart_toStartOf="@id/green_seek"
+        app:layout_constraintBottom_toBottomOf="@id/red_label" />
+
+    <SeekBar
+        android:id="@+id/green_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/red_seek"
+        app:layout_constraintEnd_toStartOf="@id/blue_seek"
+        app:layout_constraintStart_toEndOf="@id/red_seek" />
+
+
+    <TextView
+        android:id="@+id/blue_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Blue"
+        app:layout_constraintStart_toStartOf="@id/blue_seek"
+        app:layout_constraintBottom_toBottomOf="@id/green_label" />
+
+    <SeekBar
+        android:id="@+id/blue_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/green_seek"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/green_seek" />
+
+
+    <CheckBox
+        android:id="@+id/is_charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/charge_label"
+        app:layout_constraintBottom_toBottomOf="@id/charge_seek"
+        android:text="Is charging" />
+
+    <TextView
+        android:id="@+id/charge_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Level"
+
+        app:layout_constraintTop_toBottomOf="@id/green_seek"
+        app:layout_constraintStart_toStartOf="@id/charge_seek"
+        />
+
+    <SeekBar
+        android:id="@+id/charge_seek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+
+        app:layout_constraintTop_toBottomOf="@id/charge_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/is_charging" />
+
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/charge_seek">
+
+        <iam.thevoid.batteryview.BatteryView
+            android:id="@+id/battery_view"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            app:bv_color="@android:color/holo_red_dark"
+            app:bv_percent="12" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

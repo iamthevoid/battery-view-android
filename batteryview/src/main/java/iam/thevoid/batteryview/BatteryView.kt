@@ -10,6 +10,7 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
@@ -17,14 +18,22 @@ import androidx.core.content.ContextCompat
 /**
  * Created by iam on 24.10.17.
  */
-class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = -1) : AppCompatImageView(context, attrs, defStyleAttr) {
-    private var batteryLevelPaint: Paint? = null
+class BatteryView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1
+) : AppCompatImageView(context, attrs, defStyleAttr) {
+
+    private var batteryLevelPaint: Paint = Paint()
     private var isCharging = false
     private var borderThickness = 0f
     private var batteryLevelCornerRadius = 0f
     private var percent = 0f
     private val rect = RectF(0f, 0f, 0f, 0f)
 
+    /**
+     * View tint color.
+     */
     @ColorInt
     var color = Color.WHITE
         set(newColor) {
@@ -32,7 +41,30 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
             setColorFilter(newColor)
             batteryLevelPaint = Paint().apply {
                 color = newColor
+                isAntiAlias = true
             }
+        }
+
+    /**
+     * Border coefficient. Used percent value because must be relative to view size. Default is 0.06
+     * because with it view looks good and optimal fit
+     */
+    @FloatRange(from = 0.0, to = 1.0)
+    var borderThicknessPercent: Float = 0.06f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+
+    /**
+     * Spacing between border and internal charge-level rect. Relative as [borderThicknessPercent],
+     * but relative to border thickness. Actually is percent of border thickness.
+     */
+    var internalSpacing: Float = 0.5f
+        set(value) {
+            field = value
+            invalidate()
         }
 
     init {
@@ -46,9 +78,10 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
     private fun obtainAttributes(attrs: AttributeSet) {
         val a = context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.BatteryView,
-                0, 0)
+            attrs,
+            R.styleable.BatteryView,
+            0, 0
+        )
         try {
             isCharging = a.getBoolean(R.styleable.BatteryView_bv_charging, false)
             color = a.getColor(R.styleable.BatteryView_bv_color, Color.WHITE)
@@ -61,15 +94,12 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var widthSpec = widthMeasureSpec
         var heightSpec = heightMeasureSpec
-        val width = MeasureSpec.getSize(widthSpec)
-        val height = MeasureSpec.getSize(heightSpec)
-        if (height != 0 && (height <= width || width == 0)) {
-            widthSpec = MeasureSpec.makeMeasureSpec((height.toFloat() / 22f * 14f).toInt(), MeasureSpec.EXACTLY)
-            borderThickness = height.toFloat() / 22f
-        } else if (width != 0 && (width <= height || height == 0)) {
-            heightSpec = MeasureSpec.makeMeasureSpec((width.toFloat() / 14f * 22f).toInt(), MeasureSpec.EXACTLY)
-            borderThickness = width.toFloat() / 14f
-        }
+        val min = kotlin.math.min(MeasureSpec.getSize(widthSpec), MeasureSpec.getSize(heightSpec))
+        widthSpec =
+            MeasureSpec.makeMeasureSpec((min.toFloat() / 22f * 17f).toInt(), MeasureSpec.EXACTLY)
+        heightSpec =
+            MeasureSpec.makeMeasureSpec((min.toFloat() / 17f * 22f).toInt(), MeasureSpec.EXACTLY)
+        borderThickness = min.toFloat() * borderThicknessPercent
         batteryLevelCornerRadius = borderThickness
         super.onMeasure(widthSpec, heightSpec)
     }
@@ -105,14 +135,23 @@ class BatteryView @JvmOverloads constructor(context: Context?, attrs: AttributeS
      */
     override fun onDraw(canvas: Canvas) {
         if (!isCharging) {
-            val width = width.toFloat() - 4f * borderThickness
-            val height = (height.toFloat() - 6f * borderThickness) * percent / 100f
-            val left = 2f * borderThickness
-            val top = getHeight().toFloat() - borderThickness * 2f - height
+            val rectMarginBorderMultiplier = 1 + internalSpacing
+            val width = width.toFloat() - 2 * rectMarginBorderMultiplier * borderThickness
+            val height =
+                (height.toFloat() - (2 + 2 * rectMarginBorderMultiplier) * borderThickness) * percent / 100f
+
+            val left = rectMarginBorderMultiplier * borderThickness
+            val top = getHeight().toFloat() - borderThickness * rectMarginBorderMultiplier - height
+
             val right = left + width
             val bottom = top + height
             rect[left, top, right] = bottom
-            canvas.drawRoundRect(rect, batteryLevelCornerRadius, batteryLevelCornerRadius, batteryLevelPaint!!)
+            canvas.drawRoundRect(
+                rect,
+                batteryLevelCornerRadius,
+                batteryLevelCornerRadius,
+                batteryLevelPaint
+            )
         }
         super.onDraw(canvas)
     }
