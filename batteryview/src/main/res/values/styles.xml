@@ -4,6 +4,7 @@
         <attr name="bv_color" format="color"/>
         <attr name="bv_percent" format="integer"/>
         <attr name="bv_charging" format="boolean"/>
+        <attr name="bv_internalSpacing" format="float"/>
     </declare-styleable>
 
 </resources>

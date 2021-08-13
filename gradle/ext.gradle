@@ -5,20 +5,20 @@ def property(String key) {
 }
 
 ext {
-    libBintrayUser = property('bintrayUser')
-    libBintrayApiKey = property('bintrayApiKey')
 
-    libPublishVersion = '0.5.5'
+    libPublishVersion = '0.6.0'
     libUploadName = 'BatteryView'
-    libGroupId = 'iam.thevoid.batteryview'
-    libUserOrg = 'iamthevoid'
+    libGroupId = 'io.github.iamthevoid.batteryview'
+    libDesc = 'Simple view to show battery charging level.'
+    libArtifactId = 'batteryview'
 
     libLcenseName = 'The Apache Software License, Version 2.0'
     libLcenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    libLicences = ['Apache-2.0']
 
-    libGit = 'https://github.com/iamthevoid/battery-view-android.git'
-    libWebsite = 'https://github.com/iamthevoid/battery-view-android'
+    libUrl = 'https://github.com/iamthevoid/battery-view-android'
+    libScmConnection = 'scm:git:github.com/iamthevoid/battery-view-android.git'
+    libScmDeveloperConnection = 'scm:git:ssh://github.com/iamthevoid/battery-view-android.git'
+    libGit = 'https://github.com/iamthevoid/battery-view-android/tree/main'
 
     libDeveloperId = 'iamthevoid'
     libDeveloperName = 'Alexander Tarabrin'

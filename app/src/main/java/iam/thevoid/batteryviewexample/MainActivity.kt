@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         batteryView.apply {
             color = calculateColor()
-            setBatteryLevel(INITIAL_CHARGE)
+            batteryLevel = INITIAL_CHARGE
             updateLayoutParams {
                 width = INITIAL_WIDTH
                 height = INITIAL_HEIGHT
@@ -123,13 +123,13 @@ class MainActivity : AppCompatActivity() {
         chargeSeek.apply {
             max = 100
             seekListener {
-                batteryView.setBatteryLevel(it)
+                batteryView.batteryLevel = it
                 chargeLabel.text = "Level: $it"
             }
         }
 
         chargedCb.setOnCheckedChangeListener { _, isChecked ->
-            batteryView.setCharging(isChecked)
+            batteryView.isCharging = isChecked
         }
     }
 
