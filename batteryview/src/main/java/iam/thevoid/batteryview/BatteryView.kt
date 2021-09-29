@@ -51,21 +51,33 @@ class BatteryView @JvmOverloads constructor(
         set(value) {
             field = value
             setImageResource(if (isCharging) R.drawable.ic_charging else R.drawable.ic_battery)
+            if (isCharging) setColorFilter(infillColor) else setColorFilter(borderColor)
             invalidate()
         }
 
     /**
-     * View tint color.
+     * View infill color.
      */
     @ColorInt
-    var color = Color.WHITE
+    var infillColor = Color.WHITE
         set(newColor) {
+            if (isCharging) setColorFilter(newColor)
             field = newColor
-            setColorFilter(newColor)
             batteryLevelPaint = Paint().apply {
                 color = newColor
                 isAntiAlias = true
             }
+            invalidate()
+        }
+
+    /**
+     * View border color
+     */
+    @ColorInt
+    var borderColor = Color.BLACK
+        set(newBorderColor) {
+            field = newBorderColor
+            if (!isCharging) setColorFilter(newBorderColor)
         }
 
     /**
@@ -94,7 +106,8 @@ class BatteryView @JvmOverloads constructor(
         )
         try {
             isCharging = a.getBoolean(R.styleable.BatteryView_bv_charging, false)
-            color = a.getColor(R.styleable.BatteryView_bv_color, Color.WHITE)
+            borderColor = a.getColor(R.styleable.BatteryView_bv_borderColor, Color.BLACK)
+            infillColor = a.getColor(R.styleable.BatteryView_bv_infillColor, Color.WHITE)
             batteryLevel = a.getInteger(R.styleable.BatteryView_bv_percent, 0)
             internalSpacing =
                 a.getFloat(R.styleable.BatteryView_bv_internalSpacing, DEFAULT_INTERNAL_SPACING)
@@ -116,8 +129,12 @@ class BatteryView @JvmOverloads constructor(
         super.onMeasure(widthSpec, heightSpec)
     }
 
-    fun setColorRes(@ColorRes colorRes: Int) {
-        color = ContextCompat.getColor(context, colorRes)
+    fun setInfillColorRes(@ColorRes colorRes: Int) {
+        infillColor = ContextCompat.getColor(context, colorRes)
+    }
+
+    fun setBorderColorRes(@ColorRes colorRes: Int) {
+        borderColor = ContextCompat.getColor(context, colorRes)
     }
 
 
