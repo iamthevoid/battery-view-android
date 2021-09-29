@@ -51,15 +51,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/width_seek" />
 
+    <TextView
+        android:id="@+id/infill_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Change infill color:"
+        app:layout_constraintStart_toStartOf="@id/red_seek"
+        app:layout_constraintTop_toBottomOf="@id/height_seek" />
 
     <TextView
         android:id="@+id/red_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="Red"
         app:layout_constraintStart_toStartOf="@id/red_seek"
-        app:layout_constraintTop_toBottomOf="@id/height_seek" />
+        app:layout_constraintTop_toBottomOf="@id/infill_label" />
 
     <SeekBar
         android:id="@+id/red_seek"
@@ -119,16 +127,25 @@
         app:layout_constraintStart_toEndOf="@id/green_seek" />
 
     <TextView
-        android:id="@+id/red_label2"
+        android:id="@+id/border_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Red"
-        app:layout_constraintStart_toStartOf="@id/red_seek2"
+        android:layout_marginTop="12dp"
+        android:text="Change border color:"
+        app:layout_constraintStart_toStartOf="@id/red_seek"
         app:layout_constraintTop_toBottomOf="@id/red_seek" />
 
+    <TextView
+        android:id="@+id/border_red_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Red"
+        app:layout_constraintStart_toStartOf="@id/border_red_seek"
+        app:layout_constraintTop_toBottomOf="@id/border_label" />
+
     <SeekBar
-        android:id="@+id/red_seek2"
+        android:id="@+id/border_red_seek"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -137,50 +154,50 @@
 
         app:layout_constraintEnd_toStartOf="@id/green_seek"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/red_label2" />
+        app:layout_constraintTop_toBottomOf="@id/border_red_label" />
 
 
     <TextView
-        android:id="@+id/green_label2"
+        android:id="@+id/border_green_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Green"
         app:layout_constraintStart_toStartOf="@id/green_seek"
-        app:layout_constraintBottom_toBottomOf="@id/red_label2" />
+        app:layout_constraintBottom_toBottomOf="@id/border_red_label" />
 
     <SeekBar
-        android:id="@+id/green_seek2"
+        android:id="@+id/border_green_seek"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
 
-        app:layout_constraintBottom_toBottomOf="@id/red_seek2"
+        app:layout_constraintBottom_toBottomOf="@id/border_red_seek"
         app:layout_constraintEnd_toStartOf="@id/blue_seek"
         app:layout_constraintStart_toEndOf="@id/red_seek" />
 
 
     <TextView
-        android:id="@+id/blue_label2"
+        android:id="@+id/border_blue_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="Blue"
         app:layout_constraintStart_toStartOf="@id/blue_seek"
-        app:layout_constraintBottom_toBottomOf="@id/green_label2" />
+        app:layout_constraintBottom_toBottomOf="@id/border_green_label" />
 
     <SeekBar
-        android:id="@+id/blue_seek2"
+        android:id="@+id/border_blue_seek"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
 
-        app:layout_constraintBottom_toBottomOf="@id/green_seek2"
+        app:layout_constraintBottom_toBottomOf="@id/border_green_seek"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/green_seek" />
 
@@ -205,7 +222,7 @@
         android:layout_marginTop="32dp"
         android:text="Level"
 
-        app:layout_constraintTop_toBottomOf="@id/green_seek2"
+        app:layout_constraintTop_toBottomOf="@id/border_green_seek"
         app:layout_constraintStart_toStartOf="@id/charge_seek"
         />
 
@@ -237,8 +254,8 @@
             android:layout_height="64dp"
             android:layout_gravity="center"
             android:layout_margin="32dp"
-            app:bv_bordercolor="@android:color/black"
-            app:bv_infillcolor="@android:color/holo_red_dark"
+            app:bv_borderColor="@android:color/black"
+            app:bv_infillColor="@android:color/holo_red_dark"
             app:bv_percent="12" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

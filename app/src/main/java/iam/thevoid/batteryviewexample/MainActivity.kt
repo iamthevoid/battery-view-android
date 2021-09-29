@@ -19,17 +19,17 @@ class MainActivity : AppCompatActivity() {
         const val INITIAL_RED = 16
         const val INITIAL_BLUE = 16
         const val INITIAL_GREEN = 16
-        const val INITIAL_RED2 = 0
-        const val INITIAL_BLUE2 = 0
-        const val INITIAL_GREEN2 = 0
+        const val BORDER_INITIAL_RED = 0
+        const val BORDER_INITIAL_BLUE = 0
+        const val BORDER_INITIAL_GREEN = 0
     }
 
     private var currentRed: Int = INITIAL_RED
     private var currentGreen: Int = INITIAL_GREEN
     private var currentBlue: Int = INITIAL_BLUE
-    private var currentRed2: Int = INITIAL_RED2
-    private var currentGreen2: Int = INITIAL_GREEN2
-    private var currentBlue2: Int = INITIAL_BLUE2
+    private var borderCurrentRed: Int = BORDER_INITIAL_RED
+    private var borderCurrentGreen: Int = BORDER_INITIAL_GREEN
+    private var borderCurrentBlue: Int = BORDER_INITIAL_BLUE
 
     private lateinit var batteryView: BatteryView
     private lateinit var widthSeek: SeekBar
@@ -42,12 +42,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var greenLabel: TextView
     private lateinit var blueSeek: SeekBar
     private lateinit var blueLabel: TextView
-    private lateinit var redSeek2: SeekBar
-    private lateinit var redLabel2: TextView
-    private lateinit var greenSeek2: SeekBar
-    private lateinit var greenLabel2: TextView
-    private lateinit var blueSeek2: SeekBar
-    private lateinit var blueLabel2: TextView
+    private lateinit var borderRedSeek: SeekBar
+    private lateinit var borderRedLabel: TextView
+    private lateinit var borderGreenSeek: SeekBar
+    private lateinit var borderGreenLabel: TextView
+    private lateinit var borderBlueSeek: SeekBar
+    private lateinit var borderBlueLabel: TextView
     private lateinit var chargeSeek: SeekBar
     private lateinit var chargeLabel: TextView
     private lateinit var chargedCb: CheckBox
@@ -66,12 +66,12 @@ class MainActivity : AppCompatActivity() {
         greenLabel = findViewById(R.id.green_label)
         blueSeek = findViewById(R.id.blue_seek)
         blueLabel = findViewById(R.id.blue_label)
-        redSeek2 = findViewById(R.id.red_seek2)
-        redLabel2 = findViewById(R.id.red_label2)
-        greenSeek2 = findViewById(R.id.green_seek2)
-        greenLabel2 = findViewById(R.id.green_label2)
-        blueSeek2 = findViewById(R.id.blue_seek2)
-        blueLabel2 = findViewById(R.id.blue_label2)
+        borderRedSeek = findViewById(R.id.border_red_seek)
+        borderRedLabel = findViewById(R.id.border_red_label)
+        borderGreenSeek = findViewById(R.id.border_green_seek)
+        borderGreenLabel = findViewById(R.id.border_green_label)
+        borderBlueSeek = findViewById(R.id.border_blue_seek)
+        borderBlueLabel = findViewById(R.id.border_blue_label)
         chargeSeek = findViewById(R.id.charge_seek)
         chargeLabel = findViewById(R.id.charge_label)
         chargedCb = findViewById(R.id.is_charging)
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initViews() {
         batteryView.apply {
-            infillcolor = calculateColor()
+            infillColor = calculateColor()
             batteryLevel = INITIAL_CHARGE
             updateLayoutParams {
                 width = INITIAL_WIDTH
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentRed)
             seekListener {
                 currentRed = it
-                infillcolor = calculateColor()
+                infillColor = calculateColor()
                 redLabel.text = "Red: $currentRed"
             }
         }
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentGreen)
             seekListener {
                 currentGreen = it
-                infillcolor = calculateColor()
+                infillColor = calculateColor()
                 greenLabel.text = "Green: $currentGreen"
             }
         }
@@ -114,38 +114,38 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentBlue)
             seekListener {
                 currentBlue = it
-                infillcolor = calculateColor()
+                infillColor = calculateColor()
                 blueLabel.text = "Blue: $currentBlue"
             }
         }
 
-        redLabel2.text = "Red: $currentRed2"
-        redSeek2.apply {
-            configureColor(currentRed2)
+        borderRedLabel.text = "Red: $borderCurrentRed"
+        borderRedSeek.apply {
+            configureColor(borderCurrentRed)
             seekListener {
-                currentRed2 = it
-                bordercolor = calculateColor2()
-                redLabel2.text = "Red: $currentRed2"
+                borderCurrentRed = it
+                borderColor = calculateBorderColor()
+                borderRedLabel.text = "Red: $borderCurrentRed"
             }
         }
 
-        greenLabel2.text = "Green: $currentGreen2"
-        greenSeek2.apply {
-            configureColor(currentGreen2)
+        borderGreenLabel.text = "Green: $borderCurrentGreen"
+        borderGreenSeek.apply {
+            configureColor(borderCurrentGreen)
             seekListener {
-                currentGreen2 = it
-                bordercolor = calculateColor2()
-                greenLabel2.text = "Green: $currentGreen2"
+                borderCurrentGreen = it
+                borderColor = calculateBorderColor()
+                borderGreenLabel.text = "Green: $borderCurrentGreen"
             }
         }
 
-        blueLabel2.text = "Blue: $currentBlue2"
-        blueSeek2.apply {
-            configureColor(currentBlue2)
+        borderBlueLabel.text = "Blue: $borderCurrentBlue"
+        borderBlueSeek.apply {
+            configureColor(borderCurrentBlue)
             seekListener {
-                currentBlue2 = it
-                bordercolor = calculateColor2()
-                blueLabel2.text = "Blue: $currentBlue2"
+                borderCurrentBlue = it
+                borderColor = calculateBorderColor()
+                borderBlueLabel.text = "Blue: $borderCurrentBlue"
             }
         }
 
@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity() {
         return (currentRed * 0x10000 + currentGreen * 0x100 + currentBlue + 0xFF000000).toInt()
     }
 
-    private fun calculateColor2() : Int {
-        return (currentRed2 * 0x10000 + currentGreen2 * 0x100 + currentBlue2 + 0xFF000000).toInt()
+    private fun calculateBorderColor() : Int {
+        return (borderCurrentRed * 0x10000 + borderCurrentGreen * 0x100 + borderCurrentBlue + 0xFF000000).toInt()
     }
 
     private fun SeekBar.configureColor(current: Int) =
