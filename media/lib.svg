@@ -22,10 +22,10 @@
             BatteryView
         </text>
         <text fill="#010101" x="84" fill-opacity=".3" y="15" class="tMove">
-            0.6.0
+            0.6.1
         </text>
         <text x="84" id="vText" y="14" class="tMove">
-            0.6.0
+            0.6.1
         </text>
     </g>
 </svg>

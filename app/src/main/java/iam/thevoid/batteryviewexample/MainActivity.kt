@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initViews() {
         batteryView.apply {
-            infillColor = calculateColor()
+            infillColor = calculateColor(currentRed, currentGreen, currentBlue)
             batteryLevel = INITIAL_CHARGE
             updateLayoutParams {
                 width = INITIAL_WIDTH
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentRed)
             seekListener {
                 currentRed = it
-                infillColor = calculateColor()
+                infillColor = calculateColor(currentRed, currentGreen, currentBlue)
                 redLabel.text = "Red: $currentRed"
             }
         }
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentGreen)
             seekListener {
                 currentGreen = it
-                infillColor = calculateColor()
+                infillColor = calculateColor(currentRed, currentGreen, currentBlue)
                 greenLabel.text = "Green: $currentGreen"
             }
         }
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(currentBlue)
             seekListener {
                 currentBlue = it
-                infillColor = calculateColor()
+                infillColor = calculateColor(currentRed, currentGreen, currentBlue)
                 blueLabel.text = "Blue: $currentBlue"
             }
         }
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(borderCurrentRed)
             seekListener {
                 borderCurrentRed = it
-                borderColor = calculateBorderColor()
+                borderColor = calculateColor(borderCurrentRed, borderCurrentGreen, borderCurrentBlue)
                 borderRedLabel.text = "Red: $borderCurrentRed"
             }
         }
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(borderCurrentGreen)
             seekListener {
                 borderCurrentGreen = it
-                borderColor = calculateBorderColor()
+                borderColor = calculateColor(borderCurrentRed, borderCurrentGreen, borderCurrentBlue)
                 borderGreenLabel.text = "Green: $borderCurrentGreen"
             }
         }
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             configureColor(borderCurrentBlue)
             seekListener {
                 borderCurrentBlue = it
-                borderColor = calculateBorderColor()
+                borderColor = calculateColor(borderCurrentRed, borderCurrentGreen, borderCurrentBlue)
                 borderBlueLabel.text = "Blue: $borderCurrentBlue"
             }
         }
@@ -190,12 +190,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun calculateColor() : Int {
-        return (currentRed * 0x10000 + currentGreen * 0x100 + currentBlue + 0xFF000000).toInt()
-    }
-
-    private fun calculateBorderColor() : Int {
-        return (borderCurrentRed * 0x10000 + borderCurrentGreen * 0x100 + borderCurrentBlue + 0xFF000000).toInt()
+    private fun calculateColor(red: Int, green: Int, blue: Int) : Int {
+        return (red * 0x10000 + green * 0x100 + blue + 0xFF000000).toInt()
     }
 
     private fun SeekBar.configureColor(current: Int) =

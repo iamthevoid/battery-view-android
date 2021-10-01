@@ -6,7 +6,7 @@ def property(String key) {
 
 ext {
 
-    libPublishVersion = '0.6.0'
+    libPublishVersion = '0.6.1'
     libUploadName = 'BatteryView'
     libGroupId = 'io.github.iamthevoid.batteryview'
     libDesc = 'Simple view to show battery charging level.'
