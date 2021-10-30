@@ -21,7 +21,7 @@ attribute             |  meaning
 ```app:bv_charging``` | Has 'boolean' type, sets the charging state. If battery is 'charging' level rect is not shown. Also can be set in code with view `isCharging` property.
 ```app:bv_internalSpacing``` | Has 'float' type, sets spacing between border and level drawable. Value is relative to border width and actually this is percent of border width. Also can be set in code with view `internalSpacing` property.
 ##
-You can add this lib in your project as simple as add this line to your build.gradle file **(STILL WITH ONLY ONE COLOR CONTROL)**
+You can add this lib in your project as simple as add this line to your build.gradle file
 
 ```
    implementation "$libGroupId:$libArtifactId:$libPublishVersion"
